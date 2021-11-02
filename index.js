@@ -37,7 +37,7 @@ async function run() {
             res.send(place)
         })
         // get all order
-        app.get('/allOrder',(req,res)=>{
+        app.get('/allOrder',async(req,res)=>{
             const result = await orderCollection.find({}).toArray()
             res.send(result)
         })
