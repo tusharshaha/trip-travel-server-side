@@ -15,10 +15,10 @@ async function run() {
     try {
         await client.connect();
         const database = client.db("TripTravel");
-        const travelsCollection = database.collection("orders");
-        const myOrderCollection = database.collection('myOrder');
+        const travelsCollection = database.collection("places");
+        const orderCollection = database.collection('myOrder');
         // post api
-        app.post('/addNewPlace', async (req, res) => {
+        app.post('/places', async (req, res) => {
             const place = req.body;
             const result = await travelsCollection.insertOne(place);
             console.log(`A document was inserted with the _id: ${result.insertedId}`);
@@ -31,23 +31,14 @@ async function run() {
             const place = await travelsCollection.findOne(query)
             res.send(place)
         })
-        // // upate api
-        // app.put('/places/:placeId', async (req, res) => {
-        //     const id = req.params.serviceId;
-        //     const updatedService = req.body;
-        //     const filter = { _id: ObjectId(id) };
-        //     const options = { upsert: true };
-        //     const updateDoc = {
-        //         $set: {
-        //             name: updatedService.name,
-        //             price: updatedService.price,
-        //             img: updatedService.img,
-        //             description: updatedService.description
-        //         },
-        //     };
-        //     const result = await travelsCollection.updateOne(filter, updateDoc, options);
-        //     res.json(result)
-        // })
+        // my order
+        app.get('/myOrder/:email',async(req,res)=>{
+            const result = await orderCollection.find({
+                email: req.params.email,
+              }).toArray();
+              res.send(result)
+        })
+
         // delete api
         app.delete('/places/:placeceId', async (req, res) => {
             const id = req.params.serviceId;
@@ -58,8 +49,8 @@ async function run() {
         // Get api
         app.get('/places', async (req, res) => {
             const cursor = travelsCollection.find({})
-            const service = await cursor.toArray()
-            res.send(service)
+            const place = await cursor.toArray()
+            res.send(place)
         })
     } finally {
         //   await client.close();
