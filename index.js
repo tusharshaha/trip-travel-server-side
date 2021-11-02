@@ -17,21 +17,31 @@ async function run() {
         const database = client.db("TripTravel");
         const travelsCollection = database.collection("places");
         const orderCollection = database.collection('myOrder');
-        // post api
+        // post places
         app.post('/places', async (req, res) => {
             const place = req.body;
             const result = await travelsCollection.insertOne(place);
             console.log(`A document was inserted with the _id: ${result.insertedId}`);
             res.json(result)
         })
-        // get specific api
+        // post order
+        app.post('/myOrder',async(req,res)=>{
+            const result = await orderCollection.insertOne(req.body);
+            res.json(result)
+        })
+        // get book place
         app.get('/places/:placeId', async (req, res) => {
             const id = req.params.placeId;
             const query = { _id: ObjectId(id) };
             const place = await travelsCollection.findOne(query)
             res.send(place)
         })
-        // my order
+        // get all order
+        app.get('/allOrder',(req,res)=>{
+            const result = await orderCollection.find({}).toArray()
+            res.send(result)
+        })
+        // get my order
         app.get('/myOrder/:email',async(req,res)=>{
             const result = await orderCollection.find({
                 email: req.params.email,
@@ -46,7 +56,8 @@ async function run() {
             const result = await travelsCollection.deleteOne(query);
             res.json(result)
         })
-        // Get api
+
+        // Get all place
         app.get('/places', async (req, res) => {
             const cursor = travelsCollection.find({})
             const place = await cursor.toArray()
