@@ -48,8 +48,20 @@ async function run() {
               }).toArray();
               res.send(result)
         })
-
-        // delete api
+        // upate status
+        app.put('/places/:placeId', async (req, res) => {
+            const id = req.params.placeId;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    status:'Approved'
+                },
+            };
+            const result = await orderCollection.updateOne(filter, updateDoc, options);
+            res.json(result)
+        })
+        // delete Order
         app.delete('/places/:placeId', async (req, res) => {
             const id = req.params.placeId;
             const query = { _id: ObjectId(id) }
