@@ -11,7 +11,7 @@ router.get("/all", async (req, res) => {
   res.send(result);
 });
 router.route("/:email").get(async (req, res) => {
-  const result = await Order.findOne({
+  const result = await Order.find({
     email: req.params.email,
   });
   res.send(result);
