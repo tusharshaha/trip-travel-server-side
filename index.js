@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 5000;
-const orderRoute = require("./routes/order.route");
-const placeRoute = require("./routes/place.route");
+const orderRoute = require("./routes/order.route.js");
+const placeRoute = require("./routes/place.route.j");
 const dbConnect = require("./db/dbconnect");
 require("dotenv").config();
 const app = express();
