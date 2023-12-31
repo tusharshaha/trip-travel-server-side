@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import dbConnect from "./db/dbconnect.mjs";
-import orderRoute from "./routes/order.route.mjs"
-import placeRoute from "./routes/place.route.mjs"
+import orderRoute from "./routes/order.route.mjs";
+import placeRoute from "./routes/place.route.mjs";
 const port = process.env.PORT || 5000;
 
-dotenv.config()
+dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 dbConnect();
