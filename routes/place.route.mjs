@@ -21,15 +21,6 @@ router
     const place = await Places.findById(id);
     res.send(place);
   })
-  .put(async (req, res) => {
-    const id = req.params.placeId;
-    const result = await Places.findByIdAndUpdate(id, { status: "Approved" });
-    res.json(result);
-  })
-  .delete(async (req, res) => {
-    const id = req.params.placeId;
-    const result = await Places.findByIdAndDelete(id);
-    res.json(result);
-  });
+  
 
 export default router;
