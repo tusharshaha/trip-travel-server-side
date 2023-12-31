@@ -1,5 +1,5 @@
-const express = require("express");
-const Order = require("../model/Order.model.js");
+import express from "express";
+import Order from "../model/Order.model.mjs";
 const router = express.Router();
 
 router.route("/").post(async (req, res) => {
@@ -17,4 +17,4 @@ router.route("/:email").get(async (req, res) => {
   res.send(result);
 });
 
-module.exports = router;
+export default router;

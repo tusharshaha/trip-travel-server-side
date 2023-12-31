@@ -1,5 +1,5 @@
-const express = require("express");
-const Places = require("../model/place.model.js");
+import express from "express";
+import Places from "../model/Place.model.mjs";
 const router = express.Router();
 
 router
@@ -32,4 +32,4 @@ router
     res.json(result);
   });
 
-module.exports = router;
+export default router;
