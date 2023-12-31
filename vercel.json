@@ -9,7 +9,18 @@
   "routes": [
       {
           "src": "/(.*)",
-          "dest": "/"
+          "dest": "/",
+          "methods": [
+            "GET",
+            "HEAD",
+            "PATCH",
+            "POST",
+            "DELETE",
+            "OPTIONS"
+          ],
+          "headers": {
+            "Access-Control-Allow-Origin": "https://trip-travel-ec0b4.web.app/"
+          }
       }
   ]
 }
