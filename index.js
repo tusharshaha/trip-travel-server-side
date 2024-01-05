@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: "https://trip-travel-ec0b4.web.app/",
+  origin: "*",
   methods: "GET,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
 }));
